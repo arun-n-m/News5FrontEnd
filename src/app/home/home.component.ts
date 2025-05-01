@@ -11,11 +11,14 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit{
   constructor(private apiservices: ApiService, private router: Router) { }
+  loader_active: boolean = false
   erorr_message = ''
   all_Blogs: any
   ngOnInit(): void {
+    this.loader_active = true
     this.apiservices.getHome().subscribe((data: any) => {
       this.all_Blogs = data.data
+      this.loader_active = false
     })
   }
 
