@@ -1,0 +1,37 @@
+<div class="page-title-container">
+    <h1 class="page-title">Featured Articles</h1>
+    <p class="page-subtitle">Discover trending articles across technology, lifestyle, sports, and entertainment.</p>
+</div>
+
+<main class="blog-grid-container">
+    <div class="blog-grid">
+
+        @for(blog of all_Blogs;track all_Blogs;let i=$index){
+        <article class="blog-card" (click)="blogView(blog._id)">
+            <div class="card-image">
+                <span class="category world">{{blog.category}}</span>
+                <img src="{{blog.image}}" alt="{{blog.image}}">
+            </div>
+            <div class="card-content">
+                <h2 class="card-title">{{blog.title}}</h2>
+                <div class="card-meta">
+                    <div class="author">
+                        <img src="{{blog.author.user_profile}}" alt="{{blog.author.user_profile}}"
+                            class="author-img">
+                        <span class="author-name">{{blog.author.username}}</span>
+                    </div>
+                    <div class="meta-right">
+                        <span class="date">{{blog.date | date}}</span>
+                        <span class="comments"><i class="far fa-comment"></i> {{blog.blog_comments.length}}</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+        }
+        @empty{
+        <div class="err-msg">
+        <h3>{{erorr_message}}</h3>
+        </div>
+        }
+    </div>
+</main>

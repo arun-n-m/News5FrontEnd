@@ -1,0 +1,33 @@
+<div [class]="loader_active?'loading': ''">
+    <div [class]="loader_active?'loader': ''"></div>
+  </div>
+<div class="auth-container">
+    <div class="auth-logo">
+        <h1>NEWS5</h1>
+    </div>
+
+    <div class="auth-form-container">
+        <h2>Sign in</h2>
+
+        <form class="auth-form" id="signin-form" action="" [formGroup]="loginForm" (ngSubmit)="loginForm.valid&&onLogIn()">
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="Your email" required formControlName="email">
+            </div>
+
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" required formControlName="password">
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="remember">
+                <label for="remember" class="remember-me">Remember me?</label>
+            </div>
+
+            <button type="submit" class="btn-primary">Log in</button>
+        </form>
+
+        <div class="auth-redirect">
+            Have no account yet? <a (click)="SignUp()">Sign up</a>
+        </div>
+    </div>
+</div>

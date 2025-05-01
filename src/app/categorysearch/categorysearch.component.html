@@ -1,0 +1,51 @@
+<div class="category-page">
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">{{ categoryName }}</h1>
+            <p class="page-subtitle">Showing blogs in {{ categoryName }} category</p>
+        </div>
+    </div>
+    
+    <div class="container">
+
+        <div class="loading-container" *ngIf="loading">
+            <div class="loader"></div>
+            <p>Loading blogs...</p>
+        </div>
+
+        <div class="no-results" *ngIf="!loading && blogs.length === 0">
+            <i class="fas fa-folder-open"></i>
+            <h3>No blogs found</h3>
+            <p>There are no blogs available in this category yet.</p>
+        </div>
+
+        <div class="blog-grid" *ngIf="!loading && blogs.length > 0">
+            <div class="blog-card" *ngFor="let blog of blogs">
+                <div class="card-image">
+                    <a [routerLink]="['/view', blog._id]">
+                        <img [src]="blog.image" alt="{{ blog.title }}">
+                    </a>
+                    <div class="card-category">{{ blog.category }}</div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">
+                        <a [routerLink]="['/view', blog._id]">{{ blog.title }}</a>
+                    </h3>
+                    <div class="card-excerpt">
+                        <p>{{ blog.description | slice:0:150 }}{{ blog.description.length > 150 ? '...' : '' }}</p>
+                    </div>
+                    <div class="card-meta">
+                        <div class="meta-left">
+                            <div class="author" *ngIf="blog.author">
+                                <span>By {{ blog.author.username || 'Unknown' }}</span>
+                            </div>
+                        </div>
+                        <div class="meta-right">
+                            <div class="date">{{ blog.date | date:'mediumDate' }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

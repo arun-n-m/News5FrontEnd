@@ -1,0 +1,117 @@
+<div [class]="loader_active?'loading': ''">
+    <div [class]="loader_active?'loader': ''"></div>
+</div>
+
+<header class="main-header">
+    <div class="header-container">
+        <div class="primary-menu">
+            <div class="left-menu">
+                <nav class="categories-nav">
+                    <ul>
+                        <li class="dropdown">
+                            <a [routerLink]="['/category', 'latest']">Latest</a>
+                        </li>
+                        <li class="dropdown">
+                            <a [routerLink]="['/category', 'politics']">Politics</a>
+                        </li>
+                        <li class="dropdown">
+                            <a [routerLink]="['/category', 'opinions']">Opinions</a>
+                        </li>
+                        <li class="dropdown">
+                            <a [routerLink]="['/category', 'world']">World</a>
+                        </li>
+                        <li class="dropdown">
+                            <a [routerLink]="['/category', 'media']">Media</a>
+                        </li>
+                        <li><a [routerLink]="['/category', 'tech']">Tech</a></li>
+                        <li><a [routerLink]="['/category', 'business']">Business</a></li>
+                        <li><a [routerLink]="['/category', 'fashion']">Fashion</a></li>
+                        <li><a [routerLink]="['/category', 'arts-entertainments']">Arts & Entertainments</a></li>
+                        <li><a [routerLink]="['/category', 'food']">Food</a></li>
+                        <li><a [routerLink]="['/category', 'e-books']">E-Books</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="mobile-header">
+            <button class="menu-toggle" (click)="toggleMobileIcons()">
+                <i class="fas" [ngClass]="{'fa-bars': !isIconsVisible, 'fa-times': isIconsVisible}"></i>
+            </button>
+
+            <div class="site-logo-mobile">
+                <a [routerLink]="'/home'">NEWS5</a>
+            </div>
+
+
+            <div class="mobile-icons" [ngClass]="{'show-icons': isIconsVisible}">
+                <div class="icons-header">
+                    <span>Menu</span>
+                </div>
+                <div class="icons-container">
+                    <a [routerLink]="'/create'" class="icon-item">
+                        <div class="icon-circle">
+                            <i class="fas fa-pen-to-square"></i>
+                        </div>
+                        <span class="icon-label">Create</span>
+                    </a>
+                    <a class="icon-item" (click)="onLoginClick()">
+                        <div class="icon-circle">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <span class="icon-label">Account</span>
+                    </a>
+                    <a [routerLink]="'/search'" class="icon-item">
+                        <div class="icon-circle">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <span class="icon-label">Search</span>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="desktop-secondary" [ngClass]="{'compact-header': isScrolled}">
+            <div class="site-logo" [ngClass]="{'hidden-element': isScrolled}">
+                <a [routerLink]="'/home'">NEWS5</a>
+            </div>
+            <div class="right-menu" [ngClass]="{'no-margin': isScrolled}">
+                <a [routerLink]="'/create'" class="cart-icon"><i class="fas fa-pen-to-square"></i></a>
+                <a class="user-icon" (click)="onLoginClick()"><i class="fas fa-user-circle"></i></a>
+                <a [routerLink]="'/search'" class="search-icon"><i class="fas fa-search"></i></a>
+                <!-- <a [routerLink]="'/view'" class="theme-toggle"><i class="fas fa-moon"></i></a> -->
+            </div>
+        </div>
+    </div>
+</header>
+
+<router-outlet></router-outlet>
+
+<footer class="main-footer">
+    <div class="footer-nav">
+        <ul>
+            <li><a [routerLink]="['/category', 'politics']">Politics</a></li>
+            <li><a [routerLink]="['/category', 'opinions']">Opinions</a></li>
+            <li><a [routerLink]="['/category', 'world']">World</a></li>
+            <li><a [routerLink]="['/category', 'media']">Media</a></li>
+        </ul>
+    </div>
+    <div class="social-links">
+        <a href="https://in.linkedin.com/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.facebook.com/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+    <div class="copyright">
+        <p>News5 © 2024, All rights reserved.</p>
+        <div class="legal-links">
+            <a href="">Privacy notice</a>
+            <a href="">Terms of condition</a>
+        </div>
+    </div>
+    <a class="back-to-top" (click)="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</footer>

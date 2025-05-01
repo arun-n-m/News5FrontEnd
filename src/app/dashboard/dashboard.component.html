@@ -1,0 +1,45 @@
+<div class="main">
+    <div class="profile">
+        <div class="profile-blok">
+            <img src="https://res.cloudinary.com/dlqaoh20g/image/upload/v1744560595/cover_xbztal.jpg" alt="Cover photo">
+        </div>
+        <div class="profile-img">
+            <img [src]="curentuser.user_profile" [alt]="curentuser.username">
+        </div>
+    </div>
+
+    <div class="profile-details">
+        <div class="user-details">
+            <h2>{{curentuser.username}}</h2>
+            <p>{{curentuser.email}}</p>
+            <button class="logout-btn" (click)="logOut()">Logout <i class='bx bx-log-out'></i></button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(blog of blogs;track blog;let i = $index){
+                <tr>
+                    <td data-label="Title">{{blog.title}}</td>
+                    <td data-label="Date">{{blog.date | date}}</td>
+                    <td data-label="Category">{{blog.category}}</td>
+                    <td data-label="Actions">
+                        <button class="delete-btn" (click)="deleteBlog(blog._id)">
+                            <i class='bx bx-trash'></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

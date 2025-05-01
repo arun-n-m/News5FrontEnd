@@ -1,0 +1,47 @@
+<div [class]="loader_active?'loading': ''">
+    <div [class]="loader_active?'loader': ''"></div>
+  </div>
+  <div class="auth-container">
+  
+    <div class="auth-logo">
+      <h1>NEWS5</h1>
+    </div>
+  
+    <div class="auth-form-container">
+      <h2>Create an account</h2>
+  
+      <form class="auth-form" id="signup-form" [formGroup]="signup" (ngSubmit)="signup.valid && onSignup()">
+        <div class="profile-upload">
+          <div class="upload-container" (click)="triggerUpload()">
+            <div class="upload-icon" *ngIf="!signup_img || signup_img === 'profile.jpg'">+</div>
+            <img [src]="signup_img" *ngIf="signup_img && signup_img !== 'profile.jpg'" />
+          </div>
+          <span class="upload-text">Upload profile picture</span>
+          <input type="file" #fileInput id="profile-upload" accept="image/*" (change)="upload($event)" />
+        </div>
+  
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Username" required formControlName="username" />
+        </div>
+  
+        <div class="form-group">
+          <input type="email" class="form-control" placeholder="Your email" required formControlName="email" />
+        </div>
+  
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Password" required formControlName="password" />
+        </div>
+  
+        <div class="checkbox-group">
+          <input type="checkbox" id="terms" required />
+          <label for="terms" class="terms">I read and accept the <a href="#">terms of use</a>.</label>
+        </div>
+  
+        <button type="submit" class="btn-primary">Create my account</button>
+      </form>
+  
+      <div class="auth-redirect">
+        Already have an account? <a (click)="loginClick()">Sign in</a>
+      </div>
+    </div>
+  </div>

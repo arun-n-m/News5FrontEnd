@@ -1,0 +1,106 @@
+<div class="container" id="container">
+    @if(blogview){
+
+    <div class="blog-title">
+        <h1>{{blogview.title}}</h1>
+
+        <div class="social-share">
+            <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+            <a href="https://in.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.pinterest.com/"><i class="fab fa-pinterest-p"></i></a>
+            <a href="mailto:someone@gmail.com?subject=Hello&body=Just checking in!"><i class="far fa-envelope"></i></a>
+            <a (click)="copyLink(blogview._id)"><i class="fas fa-link"></i></a>
+        </div>
+    </div>
+
+    <div class="blog-content">
+
+        <div class="blog-image">
+            <img src="{{blogview.image}}" alt="Street Food">
+        </div>
+
+        <p>{{blogview.description}}</p>
+
+    </div>
+
+    <div class="related-posts">
+        <h2>Related to this topic:</h2>
+        <div class="related-posts-grid">
+            @for (post of relatedPosts; track post.title) {
+            <a href="#" class="related-post">
+                <img [src]="post.imageUrl" [alt]="post.title">
+                <h3>{{ post.title }}</h3>
+                <div class="date">{{ post.date }}</div>
+            </a>
+            }
+        </div>
+    </div>
+
+    <div class="comments-section">
+        <h2>Comments ({{comment_length}})</h2>
+
+        @for (comment of blogview.blog_comments;track comment; let i = $index) {
+        <div class="comment-thread">
+
+            <div class="comment">
+                <div class="comment-avatar">
+                    <img [src]="comment.comment_user.user_profile" [alt]="comment.comment_user.user_profile">
+                </div>
+                <div class="comment-content">
+                    <div class="comment-author">{{comment.comment_user.username}}</div>
+                    <div class="comment-meta">
+                        <span>{{comment.date |date}}</span>
+                        <a class="reply-link" (click)="toggleReplyForm(i, $event)">Reply</a>
+                    </div>
+                    <div class="comment-text">
+                        {{comment.comment}}
+                    </div>
+                    <div class="reply-form" [id]="'reply-form-' + i">
+                        <textarea placeholder="Write your reply..."></textarea>
+                        <div class="reply-buttons">
+                            <button (click)="submitReply(i)">Reply</button>
+                            <button class="cancel-button" (click)="cancelReply(i)">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (comment.comment_replays && comment.comment_replays.length > 0) {
+            <div class="comment-divider"></div>
+            }
+
+            @for (reply of comment.comment_replays;track reply;let j = $index) {
+            <div class="comment reply-comment">
+                <div class="comment-avatar">
+                    <img [src]="reply.replay_user.user_profile" [alt]="reply.replay_user.user_profile">
+                </div>
+                <div class="comment-content">
+                    <div class="comment-author">{{ reply.replay_user.username }}</div>
+                    <div class="comment-meta">
+                        <span>{{ reply.date |date }}</span>
+
+                    </div>
+                    <div class="comment-text">
+                        {{reply.replay}}
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        }
+    </div>
+
+    <div class="leave-comment">
+        <h2>Leave a Comment</h2>
+        <form class="comment-form" (ngSubmit)="submitComment()">
+            <textarea placeholder="Your comment" required [(ngModel)]="comment" name="comment"></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    }
+    @else{
+    <h2 style="text-align: center;">NO BLOGS</h2>
+    }
+
+</div>

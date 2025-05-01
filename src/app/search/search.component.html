@@ -1,0 +1,43 @@
+<div class="search-page-container">
+    <div class="search-content">
+
+        <div class="search-results">
+            <h2 class="search-title">Search Blogs</h2>
+
+            <div class="search-box">
+                <input type="text" [(ngModel)]="query" (input)="onSearch()" placeholder="Search blog titles..."
+                    class="form-control search-input" />
+                <div *ngIf="searching" class="loader"></div>
+            </div>
+
+            <div *ngIf="searchResults.length === 0 && query.trim().length > 0" class="no-results">
+                No blogs found matching "{{ query }}"
+            </div>
+
+            <div *ngIf="searchResults.length > 0" class="results-count">
+                Found {{ searchResults.length }} result{{ searchResults.length !== 1 ? 's' : '' }}
+            </div>
+
+            <div class="results-grid">
+                <div class="result-card" *ngFor="let blog of searchResults" (click)="navigateToBlog(blog._id)">
+                    <div class="card-image">
+                        <img [src]="blog.image || '/api/placeholder/400/300'" [alt]="blog.title">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">{{ blog.title }}</h3>
+                        <p class="card-description" *ngIf="blog.description">
+                            {{ blog.description.length > 100 ? blog.description.substring(0, 100) + '...' :
+                            blog.description }}
+                        </p>
+                        <div class="card-meta" *ngIf="blog.author">
+                            <span class="author">By {{ blog.author.username }}</span>
+                            <span class="dot-separator">•</span>
+                            <span class="date">{{ blog.date | date:'mediumDate' }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

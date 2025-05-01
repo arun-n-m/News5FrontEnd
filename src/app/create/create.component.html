@@ -1,0 +1,49 @@
+<section class="blog-create">
+    <h1>Create a New Blog</h1>
+
+    <form class="blog-form" action="" #creationform="ngForm" (ngSubmit)="creationform.valid&&onSubmit()">
+
+        <div class="form-group">
+            <label for="blog-image">Blog Image</label>
+            <input type="file" id="blog-image" accept="image/*"  (change)="upload($event)" required>
+            <small class="input-hint">Recommended size: 800 x 400 pixels</small>
+            @if(creationform.submitted&&['required']){
+                <p style="color:rgb(246, 41, 41);">image required..</p>
+                }
+        </div>
+
+        <div class="form-group">
+            <label for="blog-title">Blog Heading</label>
+            <input type="text" id="blog-title" placeholder="Enter blog title"  [(ngModel)]="creationForm.title" #title="ngModel" name="title" required>
+            @if(creationform.submitted&&title.errors?.['required']){
+                <p style="color:rgb(246, 41, 41);">Blog Heading is required..</p>
+                }
+        </div>
+
+        <div class="form-group">
+            <label>Tags</label>
+            <div class="tags-checkboxes">
+              <label><input type="radio" name="tag" value="politics" (change)="onTagSelect('politics')"> Politics</label>
+              <label><input type="radio" name="tag" value="opinions" (change)="onTagSelect('opinions')"> Opinions</label>
+              <label><input type="radio" name="tag" value="world" (change)="onTagSelect('world')"> World</label>
+              <label><input type="radio" name="tag" value="media" (change)="onTagSelect('media')"> Media</label>
+              <label><input type="radio" name="tag" value="tech" (change)="onTagSelect('tech')"> Tech</label>
+              <label><input type="radio" name="tag" value="business" (change)="onTagSelect('business')"> Business</label>
+              <label><input type="radio" name="tag" value="fashion" (change)="onTagSelect('fashion')"> Fashion</label>
+              <label><input type="radio" name="tag" value="food" (change)="onTagSelect('food')"> Food</label>
+              <label><input type="radio" name="tag" value="arts" (change)="onTagSelect('arts')"> Arts & Entertainment</label>
+            </div>
+          </div>
+          
+        <div class="form-group">
+            <label for="blog-description">Description</label>
+            <textarea id="blog-description" rows="6" placeholder="Write your blog here..." [(ngModel)]="creationForm.content" #content="ngModel" name="content"
+            required></textarea>
+            @if(creationform.submitted&&content.errors?.['required']){
+                <p style="color:rgb(246, 41, 41);">content is required..</p>
+                }
+        </div>
+
+        <button type="submit" class="create-btn">Create Blog</button>
+    </form>
+</section>
