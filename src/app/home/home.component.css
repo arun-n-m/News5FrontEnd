@@ -1,6 +1,16 @@
 .loading::before {
-    background:var(--light-color)
+    background: var(--light-color);
+    z-index: 999;
 }
+
+.loading {
+    z-index: 1000;
+}
+
+.loader {
+    z-index: 1000;
+}
+
 .page-title-container {
     text-align: center;
     padding: 40px 20px;
@@ -125,7 +135,7 @@
     .blog-grid-container {
         padding: 15px;
     }
-    
+
     .blog-grid {
         gap: 20px;
     }
@@ -135,11 +145,11 @@
     .blog-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .page-title {
         font-size: 36px;
     }
-    
+
     .err-msg {
         grid-column: span 2;
     }
@@ -149,11 +159,11 @@
     .page-title-container {
         padding: 30px 15px;
     }
-    
+
     .page-title {
         font-size: 32px;
     }
-    
+
     .card-image {
         height: 180px;
     }
@@ -163,21 +173,21 @@
     .blog-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .page-title {
         font-size: 28px;
         margin-bottom: 10px;
     }
-    
+
     .page-subtitle {
         font-size: 14px;
     }
-    
+
     .card-title {
         font-size: 16px;
         margin-bottom: 10px;
     }
-    
+
     .err-msg {
         grid-column: span 1;
     }
@@ -187,26 +197,26 @@
     .page-title-container {
         padding: 20px 10px;
     }
-    
+
     .page-title {
         font-size: 24px;
     }
-    
+
     .card-content {
         padding: 15px;
     }
-    
+
     .card-meta {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
     }
-    
+
     .meta-right {
         width: 100%;
         justify-content: space-between;
     }
-    
+
     .card-image {
         height: 160px;
     }
@@ -216,17 +226,17 @@
     .card-image {
         height: 140px;
     }
-    
+
     .category {
         font-size: 10px;
         padding: 4px 8px;
     }
-    
+
     .author-img {
         width: 25px;
         height: 25px;
     }
-    
+
     .card-meta {
         font-size: 12px;
     }
@@ -237,7 +247,7 @@
         transform: none;
         box-shadow: var(--shadow);
     }
-    
+
     .blog-card:active {
         transform: scale(0.98);
     }
@@ -247,7 +257,7 @@
     .blog-grid {
         grid-template-columns: repeat(3, 1fr);
     }
-    
+
     .err-msg {
         grid-column: span 3;
     }
@@ -257,7 +267,7 @@
     .blog-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .err-msg {
         grid-column: span 2;
     }
