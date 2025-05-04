@@ -28,10 +28,10 @@
         <h2>Related to this topic:</h2>
         <div class="related-posts-grid">
             @for (post of relatedPosts; track post.title) {
-            <a href="#" class="related-post">
-                <img [src]="post.imageUrl" [alt]="post.title">
+            <a class="related-post" (click)="blogView(post._id)">
+                <img [src]="post.image" [alt]="post.title">
                 <h3>{{ post.title }}</h3>
-                <div class="date">{{ post.date }}</div>
+                <div class="date">{{ post.date | date}}</div>
             </a>
             }
         </div>

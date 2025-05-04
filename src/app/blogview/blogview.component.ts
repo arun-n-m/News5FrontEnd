@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
@@ -7,7 +7,7 @@ import { AuthService } from '../../authService/auth.service';
 
 @Component({
   selector: 'app-blogview',
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule,DatePipe],
   templateUrl: './blogview.component.html',
   styleUrl: './blogview.component.css'
 })
@@ -116,5 +116,10 @@ export class BlogviewComponent implements OnInit{
         });
       }
     }
+  }
+
+  blogView(id: any) {
+    console.log("viewwwwwwwwwwid", id);
+    this.router.navigateByUrl(`/view/${id}`)
   }
 }
