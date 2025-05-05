@@ -331,6 +331,10 @@
     transform: translateY(-2px);
 }
 
+.loading::before {
+    background: var(--light-color);
+}
+
 @media (max-width: 1200px) {
     .container {
         max-width: 95%;

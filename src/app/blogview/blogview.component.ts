@@ -23,8 +23,10 @@ export class BlogviewComponent implements OnInit {
   loader_active: boolean = false
 
   ngOnInit(): void {
-    this.id = this.aroute.snapshot.params['id']
-    this.fetchBlog(this.id);
+    this.aroute.params.subscribe(params => {
+      this.id = params['id'];
+      this.fetchBlog(this.id);
+    });
   }
 
   fetchBlog(id: string): void {
@@ -126,6 +128,6 @@ export class BlogviewComponent implements OnInit {
 
   blogView(id: any) {
     // console.log("viewwwwwwwwwwid", id);
-    this.router.navigateByUrl(`/view/${id}`)
+    this.router.navigate(['/view', id]);
   }
 }
