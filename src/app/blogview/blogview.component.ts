@@ -7,32 +7,38 @@ import { AuthService } from '../../authService/auth.service';
 
 @Component({
   selector: 'app-blogview',
-  imports: [FormsModule,CommonModule,DatePipe],
+  imports: [FormsModule, CommonModule, DatePipe],
   templateUrl: './blogview.component.html',
   styleUrl: './blogview.component.css'
 })
-export class BlogviewComponent implements OnInit{
-  constructor(private apiservices:ApiService, private router: Router, private aroute: ActivatedRoute,private authService: AuthService) { }
+export class BlogviewComponent implements OnInit {
+  constructor(private apiservices: ApiService, private router: Router, private aroute: ActivatedRoute, private authService: AuthService) { }
   blogview: any;
   id: any;
   comment = "";
   comment_length = 0
   error_msg: any;
   newComment: string = '';
-  relatedPosts:any
+  relatedPosts: any
+  loader_active: boolean = false
 
   ngOnInit(): void {
     this.id = this.aroute.snapshot.params['id']
-    this.apiservices.getBlogView(this.id).subscribe((res: any) => {
-      // console.log("res.blogview", res);
-      this.blogview = res.blogs
-      this.comment_length = this.blogview.blog_comments.length
-      this.relatedPosts=res.relatedPosts
-      this.error_msg = res.msg
-    })
-    
+    this.fetchBlog(this.id);
   }
-  
+
+  fetchBlog(id: string): void {
+    this.loader_active = true
+    this.apiservices.getBlogView(id).subscribe((res: any) => {
+      this.blogview = res.blogs;
+      this.comment_length = this.blogview.blog_comments.length;
+      this.relatedPosts = res.relatedPosts;
+      this.error_msg = res.msg;
+      window.scrollTo(0, 0);
+      this.loader_active = false
+    });
+  }
+
   copyLink(id: string): void {
     const url = `http://localhost:4200/view/${id}`;
     navigator.clipboard.writeText(url).then(() => {
@@ -41,16 +47,16 @@ export class BlogviewComponent implements OnInit{
       console.error('Failed to copy link: ', err);
     });
   }
-  
+
   toggleReplyForm(index: number, event: Event): void {
     event.preventDefault();
-    
-    // Close all open reply forms first
+
+  
     document.querySelectorAll('.reply-form').forEach(form => {
       form.setAttribute('style', 'display: none');
     });
+
     
-    // Toggle the clicked reply form
     const replyForm = document.getElementById(`reply-form-${index}`);
     if (replyForm) {
       const currentDisplay = window.getComputedStyle(replyForm).display;
@@ -79,12 +85,12 @@ export class BlogviewComponent implements OnInit{
     if (this.comment.trim()) {
       const commentData = {
         comment: this.comment,
-        user: user 
+        user: user
       };
 
       this.apiservices.postComment(this.blogview._id, commentData).subscribe((data: any) => {
         // console.log("Comment added:", data);
-        this.comment = ""; 
+        this.comment = "";
         window.location.reload();
       });
     }
@@ -102,16 +108,16 @@ export class BlogviewComponent implements OnInit{
       const textArea = replyForm.querySelector('textarea') as HTMLTextAreaElement;
       if (textArea && textArea.value.trim()) {
         const commentId = this.blogview.blog_comments[commentIndex]._id;
-        
-        
+
+
         const replyData = {
           replays: textArea.value,
-          user: user 
+          user: user
         };
 
         this.apiservices.postReplay(commentId, replyData).subscribe((data: any) => {
           // console.log("Reply added:", data);
-          textArea.value = ''; 
+          textArea.value = '';
           window.location.reload();
         });
       }
@@ -119,7 +125,7 @@ export class BlogviewComponent implements OnInit{
   }
 
   blogView(id: any) {
-    console.log("viewwwwwwwwwwid", id);
+    // console.log("viewwwwwwwwwwid", id);
     this.router.navigateByUrl(`/view/${id}`)
   }
 }

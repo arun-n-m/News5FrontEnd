@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit{
       }
       else if (data.msg != "success") {
         alert(this.error_msg = data.msg)
+        this.loader_active = false
       }
     })
   }
